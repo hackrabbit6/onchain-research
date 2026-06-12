@@ -44,6 +44,53 @@ bun run src/index.ts doctor                                    # print resolved 
 
 Run `bun run src/index.ts <scan|wallet|...> --help` for the full clustering flag list.
 
+## Sample output
+
+All examples below use the built-in `fixture` provider, so they are fully
+reproducible without any API key.
+
+`scan --format table` — concentration plus suspected-coordination clusters:
+
+```text
+Token: APPLE (0xccfb3e8b1772bd3a9fc62deaf75127adad597777)
+Top holder: 18.00% | Top 5: 59.50% | Top 10: 59.50%
+
+Address        Balance  Holding  Label
+-------------  -------  -------  -----
+0x1111...1111  180,000  18.00%
+0x2222...2222  165,000  16.50%
+0x3333...3333  150,000  15.00%
+0x4444...4444  60,000   6.00%
+0x5555...5555  40,000   4.00%
+
+Cluster    Confidence  Score  Wallets  Evidence
+---------  ----------  -----  -------  --------
+cluster-1  high        100    3        12
+
+Warning: Cluster output is research evidence, not proof of common control.
+Warning: Known CEX, LP, router, burn, or infrastructure addresses were filtered from cluster scoring.
+```
+
+`cluster --format md` — each cluster ships its evidence with tx hashes, so the
+output reads as a reviewable case file, not a black-box score:
+
+```markdown
+### cluster-1
+
+- Confidence: high
+- Score: 100
+- Wallets: 0x1111…1111, 0x2222…2222, 0x3333…3333
+
+| Rule                | Score | Evidence Tx        | Reason                                    |
+|---------------------|------:|--------------------|-------------------------------------------|
+| same_funding_source |    40 | 0xfund-a, 0xfund-b | Both wallets were funded by 0xaaaa…aaaa    |
+| near_buy_window     |    25 | 0xbuy-a,  0xbuy-b  | Buys happened within 30 minutes           |
+| similar_buy_size    |    15 | 0xbuy-a,  0xbuy-b  | Base-asset buy sizes are close            |
+| same_router         |    10 | 0xbuy-a,  0xbuy-b  | Both wallets used 0x10ed…024e (PancakeSwap)|
+
+- Warning: Suspected coordination only; not proof of common control.
+```
+
 ## Architecture
 
 ```
