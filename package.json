@@ -1,0 +1,24 @@
+{
+  "name": "onchain-research",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "Local-first onchain research CLI: EVM/BSC holder clustering plus multi-chain wallet tracking and Solana token research.",
+  "bin": {
+    "onchain-research": "./src/index.ts"
+  },
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "quick": "bun run src/index.ts",
+    "scan": "bun run src/index.ts scan",
+    "wallet": "bun run src/index.ts wallet",
+    "analyze-token": "bun run src/index.ts analyze-token",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.8.3"
+  }
+}
