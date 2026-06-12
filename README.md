@@ -14,6 +14,9 @@ It does not place trades and stores only durable research outputs on disk.
 > Solana meme-token research, watchlists, and trade journaling live in the separate
 > **meme-flow-coach** project. This repo stays focused on EVM/BSC.
 
+📝 **Engineering case study** — how three overlapping prototypes became two clean,
+non-overlapping repos: [docs/CASE_STUDY.md](docs/CASE_STUDY.md)
+
 ## Requirements
 
 - [Bun](https://bun.sh) 1.3+
